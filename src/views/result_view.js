@@ -1,16 +1,12 @@
 const PubSub = require('../helpers/pub_sub.js');
 
-
 const ResultView = function () {
-
 
 }
 
 ResultView.prototype.bindEvents = function () {
   PubSub.subscribe('Countries: send-country', (evt) => {
     this.render(evt.detail);
-
-
   })
 
 };
@@ -38,11 +34,12 @@ ResultView.prototype.render = function (data) {
 
   const countryLanguageList = data.languages;
   console.log(data.languages);
-  for (let listItem of countryLanguageList) {
+
+  countryLanguageList.forEach((listItem)=>{
     const displayItem =  document.createElement('li');
     displayItem.textContent = listItem.name;
     countryLanguageUl.appendChild(displayItem);
-  }
+  })
 
   country.appendChild(countryHeader);
   country.appendChild(countryFlag);
